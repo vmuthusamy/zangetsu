@@ -6,6 +6,57 @@ package com.zangetsu.past;
 public class Utility
 {
 
+    public static int getNumberOfConnectedComponents (int[][] input, int maxRowSize, int maxColSize)
+    {
+        boolean[][] lookup = new boolean[maxRowSize][maxColSize];
+        int count = 0;
+
+        for (int i = 0; i < maxRowSize; i++)
+        {
+            for (int j = 0; j < maxColSize; i++)
+            {
+                if (input[i][j] == 1)
+                {
+                    count++;
+                    traverse(lookup, input, i, j, maxRowSize, maxColSize);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private static void traverse (boolean[][] lookup, int[][] input, int x, int y, int maxRowSize,
+            int maxColSize)
+    {
+
+        if (checkIndicesAreBound(x, y, maxRowSize, maxColSize))
+        {
+            if (!lookup[x][y])
+            {
+                lookup[x][y] = true;
+                traverse(lookup, input, x - 1, y, maxRowSize, maxColSize);
+                traverse(lookup, input, x + 1, y, maxRowSize, maxColSize);
+                traverse(lookup, input, x, y - 1, maxRowSize, maxColSize);
+                traverse(lookup, input, x, y + 1, maxRowSize, maxColSize);
+            }
+        }
+
+    }
+
+    private static boolean checkIndicesAreBound (int x, int y, int maxRowSize, int maxColSize)
+    {
+
+        if (x >= 0 && x < maxRowSize)
+        {
+            if (y >= 0 && y < maxColSize)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static int getIntFromString (String input)
     {
 
