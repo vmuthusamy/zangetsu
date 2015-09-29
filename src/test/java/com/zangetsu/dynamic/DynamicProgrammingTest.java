@@ -20,4 +20,17 @@ public class DynamicProgrammingTest
 
         assertEquals(expectedSize, DynamicProgramming.getLMS(example));
     }
+
+    @Test
+    public void testGetAlternatingLMS(){
+
+        int[] example = {7,12,13,22};
+        int[] linearExample ={1,2,3,4,5,6,7,8,9,10};
+
+        int expectedSize = 4;
+        int expectedLinearSize = 10;
+
+        assertEquals(expectedSize,DynamicProgramming.getMonotonicAlternatingSequence(example));
+        assertEquals(expectedLinearSize,DynamicProgramming.getMonotonicAlternatingSequence(linearExample));
+    }
 }

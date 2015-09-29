@@ -27,6 +27,31 @@ public class DynamicProgramming
         return getMaxFromArray(output);
     }
 
+    public static int getMonotonicAlternatingSequence (int[] input)
+    {
+
+        int size = input.length;
+        int[] output = new int[size];
+
+        initialize(output);
+
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                if (input[i] > input[j] && output[i] < output[j] + 1)
+                {
+                    if((input[i]%2==0 && input[j]%2!=0)||(input[i]%2!=0 && input[j]%2==0)){
+                        output[i] = output[j] + 1;
+                    }
+
+                }
+            }
+        }
+
+        return getMaxFromArray(output);
+    }
+
     private static int getMaxFromArray (int[] array)
     {
 
